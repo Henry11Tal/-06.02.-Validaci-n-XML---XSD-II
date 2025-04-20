@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Nombre: Henry Leonardo Talavera Velasquez 
+Curso: DAW1
+Fecha: 20/4/2025 
+Ejercicio: Ejercicio 3 Escribir expresiones regulares
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <!-- 1. "Capítulo 0", "Capítulo 1", "Capítulo 2"... "Capítulo 9". (Solo se permite un dígito). -->
+  <xs:element name="caso1">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:pattern value="Capítulo \d"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+
+  <!-- 2. "Capítulo 0", "Capítulo 1", "Capítulo 2"... "Capítulo 99". (Uno o dos dígitos). -->
+  <xs:element name="caso2">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:pattern value="Capítulo \d{1,2}"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+
+  <!-- 3. "Capítulo 1", "Capítulo 2", "Capítulo 3"... "Capítulo 99". (No se permite "Capítulo 0"). -->
+  <xs:element name="caso3">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:pattern value="Capítulo [1-9][0-9]?"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+
+  <!-- 4. "Capítulo 0", "Capítulo 1", "Capítulo 2"... "Capítulo 99"... "Capítulo 100"... (Uno o más dígitos). -->
+  <xs:element name="caso4">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:pattern value="Capítulo \d+"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+
+  <!-- 5. Cualquier valor de dos caracteres, cuyo primer carácter sea distinto de un dígito (0-9) y
+cuyo segundo carácter sea "Z": "aZ"... "zZ", "AZ"... "ZZ", "?Z", "=Z", "*Z"... -->
+  <xs:element name="caso5">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:pattern value="[^0-9]Z"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+
+  <!-- 6. "ABBC", "ABBBC", "ABBBBC", "ABBBBBC". -->
+  <xs:element name="caso6">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:pattern value="AB{2,5}C"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+
+  <!-- 7. El primer carácter debe ser "R". A continuación, deben aparecer obligatoriamente dos o
+más "S". Finalmente, puede aparecer o no, un dígito del 3 al 8: "RSS", "RSSS"... "RSS3"...
+"RSS8", "RSSS3"... "RSSS8"... "RSSSSSSSSSSS7"... -->
+  <xs:element name="caso7">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:pattern value="RS{2,}[3-8]?"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+
+  <!-- 8. Cualquier valor que contenga en primer lugar "COD", después tres dígitos (0-9) y,
+finalmente, uno o más caracteres cualesquiera: "COD645pera", "COD646manzana"... -->
+  <xs:element name="caso8">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:pattern value="COD\d{3}.+"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+
+</xs:schema>
